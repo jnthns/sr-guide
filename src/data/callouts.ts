@@ -10,7 +10,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'What is Session Replay?',
     body: 'Session Replay captures a video-like reconstruction of user sessions so you can see exactly what your users see — clicks, scrolls, rage clicks, and more. Use it to diagnose bugs, improve UX, and understand drop-off points.',
-    link: { label: 'Session Replay overview', url: 'https://www.docs.developers.amplitude.com/session-replay/' },
+    link: { label: 'Session Replay overview', url: 'https://amplitude.com/docs/session-replay' },
   },
   {
     steps: ['platform'],
@@ -19,7 +19,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Supported platforms',
     body: 'Session Replay is generally available for Web and iOS, available for Android, and in beta for React Native. Each platform has different SDKs, capabilities, and known limitations.',
-    link: { label: 'All Session Replay SDKs', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/' },
+    link: { label: 'All Session Replay SDKs', url: 'https://amplitude.com/docs/session-replay/instrument-session-replay' },
   },
   {
     steps: ['platform'],
@@ -28,7 +28,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Pricing and quotas',
     body: 'Session Replay usage is measured by the number of captured sessions per month. Your plan determines your monthly quota. Start with a low sample rate and scale up as needed.',
-    link: { label: 'Session Replay pricing', url: 'https://www.docs.developers.amplitude.com/session-replay/#pricing' },
+    link: { label: 'Session Replay pricing', url: 'https://amplitude.com/docs/session-replay#pricing' },
   },
 
   // ─── Platform-level callouts (persist across source, setup, and debugging steps) ───
@@ -40,7 +40,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'What Web SR can and cannot capture',
     body: 'SR records DOM changes (clicks, scrolling, input) — not video. It cannot capture Canvas, WebGL, Lottie animations, cross-origin iframes, or assets requiring authentication.',
-    link: { label: 'Web SR known limitations', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/plugin/#known-limitations' },
+    link: { label: 'Web SR known limitations', url: 'https://amplitude.com/docs/session-replay/session-replay-plugin#known-limitations' },
   },
   {
     steps: ['source', 'setup', 'debugging'],
@@ -49,7 +49,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Supported iOS frameworks and limitations',
     body: 'Session Replay for iOS supports SwiftUI and UIKit. It cannot capture out-of-process views (SFSafariViewController), AVPlayerLayer-backed views, MKMapView, or WKWebView.',
-    link: { label: 'iOS SR known limitations', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/ios/#known-limitations' },
+    link: { label: 'iOS SR known limitations', url: 'https://amplitude.com/docs/session-replay/session-replay-ios-plugin#known-limitations' },
   },
   {
     steps: ['source', 'setup', 'debugging'],
@@ -58,7 +58,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Supported Android frameworks and limitations',
     body: 'Session Replay for Android supports XML Views. Jetpack Compose is in Alpha. It cannot capture WebView, MapView, or Canvas Views.',
-    link: { label: 'Android SR known limitations', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/android/#known-limitations' },
+    link: { label: 'Android SR known limitations', url: 'https://amplitude.com/docs/session-replay/session-replay-android-plugin#known-limitations' },
   },
   {
     steps: ['source', 'setup', 'debugging'],
@@ -67,7 +67,7 @@ export const callouts: Callout[] = [
     type: 'warning',
     title: 'React Native SR is in beta — expect visual gaps',
     body: 'React Native SR wraps the native iOS and Android SDKs. WebViews, Skia-rendered views, and hardware-accelerated content will not be captured. Review the docs for the full list of known gaps.',
-    link: { label: 'React Native SR limitations', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/react-native/#known-limitations' },
+    link: { label: 'React Native SR limitations', url: 'https://amplitude.com/docs/session-replay/session-replay-react-native-sdk-plugin#known-limitations' },
   },
 
   // ─── Step 2: Source-specific callouts ─────────────────────────────────────────────
@@ -88,7 +88,7 @@ export const callouts: Callout[] = [
     type: 'warning',
     title: 'GTM requires a separate Custom HTML tag',
     body: 'The Amplitude GTM template alone does not include Session Replay. You must add a separate Custom HTML tag to load the SR plugin script and attach it to the existing Amplitude instance.',
-    link: { label: 'GTM Browser SDK template', url: 'https://www.docs.developers.amplitude.com/data/sdks/browser-2/#google-tag-manager' },
+    link: { label: 'GTM Browser SDK template', url: 'https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#google-tag-manager' },
   },
   {
     steps: ['source'],
@@ -97,7 +97,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'Legacy JS SDK is not compatible with the SR Plugin',
     body: 'The maintenance JavaScript SDK does not work with the Session Replay Plugin. You will need to use the Standalone SR SDK. Amplitude recommends migrating to the Browser 2.0 SDK if possible.',
-    link: { label: 'Browser 2.0 SDK migration guide', url: 'https://www.docs.developers.amplitude.com/data/sdks/browser-2/#migrate-from-maintenance-sdk' },
+    link: { label: 'Browser 2.0 SDK migration guide', url: 'https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#migrate-from-maintenance-sdk' },
   },
   {
     steps: ['source'],
@@ -106,7 +106,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Client-side SDK is still required',
     body: 'Even when sending events through a data warehouse or HTTP API, you must still run the SR SDK (or Plugin) client-side to capture DOM changes. The warehouse path only controls how events reach Amplitude.',
-    link: { label: 'Standalone SR SDK docs', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/' },
+    link: { label: 'Standalone SR SDK docs', url: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk' },
   },
   {
     steps: ['source'],
@@ -115,7 +115,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'ID synchronization is your responsibility',
     body: 'When using a third-party analytics provider, you must keep deviceId and sessionId in sync between your provider and the SR SDK. If they drift, replays will not attach to events.',
-    link: { label: 'Standalone SR SDK docs', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/' },
+    link: { label: 'Standalone SR SDK docs', url: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk' },
   },
   {
     steps: ['source'],
@@ -132,7 +132,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Middleware approach for legacy SDK',
     body: 'The maintenance iOS SDK uses middleware instead of plugins. You must track sessions with a timestamp and inform the SDK whenever the session timestamp changes.',
-    link: { label: 'iOS SR middleware docs', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/ios/' },
+    link: { label: 'iOS SR middleware docs', url: 'https://amplitude.com/docs/session-replay/instrument-session-replayios/' },
   },
   {
     steps: ['source'],
@@ -141,7 +141,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Middleware approach for legacy SDK',
     body: 'The maintenance Android SDK uses middleware instead of plugins. Requires version 2.40.1 or higher of the maintenance Android SDK.',
-    link: { label: 'Android SR middleware docs', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/android/' },
+    link: { label: 'Android SR middleware docs', url: 'https://amplitude.com/docs/session-replay/instrument-session-replayandroid/' },
   },
   {
     steps: ['source'],
@@ -150,7 +150,7 @@ export const callouts: Callout[] = [
     type: 'warning',
     title: 'Avoid dual SDK initialization',
     body: 'Do NOT initialize both the Amplitude RN SDK and a separate native Amplitude SDK. Two parallel pipelines will break SR linkage or cause event duplication.',
-    link: { label: 'React Native SR docs', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/react-native/' },
+    link: { label: 'React Native SR docs', url: 'https://amplitude.com/docs/session-replay/instrument-session-replayreact-native/' },
   },
 
   // ─── Step 3: Method ─────────────────────────────────────────────
@@ -180,7 +180,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'Manual property forwarding required',
     body: 'With the standalone SDK, you must manually call getSessionReplayProperties() and include the result on every logEvent call. The plugin does this automatically, but the standalone SDK does not.',
-    link: { label: 'Standalone SDK API reference', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/' },
+    link: { label: 'Standalone SDK API reference', url: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk' },
   },
   {
     steps: ['method'],
@@ -189,7 +189,7 @@ export const callouts: Callout[] = [
     type: 'warning',
     title: 'Events table needs a new column',
     body: 'You must add an [Amplitude] Session Replay ID column to your events table. The value is deviceId/sessionId (slash-separated). Only include this property on events within sessions you want replayable.',
-    link: { label: 'Amplitude HTTP API reference', url: 'https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/' },
+    link: { label: 'Amplitude HTTP API reference', url: 'https://amplitude.com/docs/apis/analytics/http-v2' },
   },
   {
     steps: ['method'],
@@ -198,7 +198,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Forward SR properties on every event',
     body: 'Call sessionReplay.getSessionReplayProperties() and merge the result into the properties of every event you send. Missing this on any event means that event won\'t link to a replay.',
-    link: { label: 'Standalone SDK API reference', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/' },
+    link: { label: 'Standalone SDK API reference', url: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk' },
   },
 
   // ─── Step 4: Setup ──────────────────────────────────────────────
@@ -210,7 +210,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'Device ID and Session ID must stay constant',
     body: 'Both IDs must remain the same for the entire session. If either changes mid-session (e.g., from an identify call that resets device ID), the replay breaks and becomes unviewable.',
-    link: { label: 'Troubleshooting Session Replay', url: 'https://www.docs.developers.amplitude.com/session-replay/troubleshooting/' },
+    link: { label: 'Troubleshooting Session Replay', url: 'https://amplitude.com/docs/session-replaytroubleshooting/' },
   },
   {
     steps: ['setup'],
@@ -219,7 +219,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'Session IDs must be Unix timestamps',
     body: 'Session IDs must be Unix timestamps in milliseconds since epoch. If your Session ID is -1, 0, or a non-timestamp value, replays will not be captured. If your pipeline can\'t send timestamps, there are alternative approaches.',
-    link: { label: 'Session Replay requirements', url: 'https://www.docs.developers.amplitude.com/session-replay/#required-properties' },
+    link: { label: 'Session Replay requirements', url: 'https://amplitude.com/docs/session-replay#required-properties' },
     internalLink: { label: 'What options do I have?', to: '/session-id-options' },
   },
   {
@@ -237,7 +237,7 @@ export const callouts: Callout[] = [
     type: 'warning',
     title: 'Segment does not send session IDs by default',
     body: 'You must generate and persist a session ID yourself (e.g., via a cookie). If you skip this, replays will not stitch to events. There are several ways to handle this depending on your pipeline.',
-    link: { label: 'Amplitude session definitions', url: 'https://www.docs.developers.amplitude.com/analytics/apis/lookup-tables-api/' },
+    link: { label: 'Amplitude session definitions', url: 'https://amplitude.com/docs/data/sources/instrument-track-sessions' },
     internalLink: { label: 'What options do I have?', to: '/session-id-options' },
   },
   {
@@ -264,7 +264,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'Do not initialize duplicate SDKs',
     body: 'Do NOT initialize both the Amplitude RN SDK and a separate native Amplitude SDK. Two parallel pipelines will break SR linkage or cause event duplication.',
-    link: { label: 'React Native SR docs', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/react-native/' },
+    link: { label: 'React Native SR docs', url: 'https://amplitude.com/docs/session-replay/instrument-session-replayreact-native/' },
   },
   {
     steps: ['setup'],
@@ -285,7 +285,7 @@ export const callouts: Callout[] = [
     type: 'warning',
     title: 'Remote sample rate always overrides code',
     body: 'The sample rate set in Session Replay Settings (by a project Admin) always overrides whatever rate you set in your SDK/plugin code. Changes take a few minutes to propagate.',
-    link: { label: 'Session Replay settings', url: 'https://www.docs.developers.amplitude.com/session-replay/#sample-rate' },
+    link: { label: 'Session Replay settings', url: 'https://amplitude.com/docs/session-replay#sample-rate' },
   },
   {
     steps: ['sampling'],
@@ -294,7 +294,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'Event property limit can silently break SR',
     body: 'If your project has hit the 2,000 event property limit, new properties including [Amplitude] Session Replay ID won\'t be indexed — and SR links will silently break. Check your property usage in the project settings.',
-    link: { label: 'Data governance best practices', url: 'https://www.docs.developers.amplitude.com/data/data-planning-playbook/' },
+    link: { label: 'Data governance best practices', url: 'https://amplitude.com/docs/data/data-planning-playbook' },
   },
   {
     steps: ['sampling'],
@@ -311,7 +311,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Quota estimation formula',
     body: 'Divide your monthly quota by your average monthly sessions to get a starting sample rate. For example: 1M quota / 4M sessions = 0.25 (25%). You can also start lower at ~15% and increase.',
-    link: { label: 'Session Replay pricing and quotas', url: 'https://www.docs.developers.amplitude.com/session-replay/#pricing' },
+    link: { label: 'Session Replay pricing and quotas', url: 'https://amplitude.com/docs/session-replay#pricing' },
   },
 
   // ─── Step 6: Privacy ────────────────────────────────────────────
@@ -323,7 +323,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'Masking is irreversible',
     body: 'Masking happens at capture time and cannot be retroactively undone. Validate that PII (phone numbers, emails, payment data) is properly masked before increasing your sample rate in production.',
-    link: { label: 'SR privacy controls docs', url: 'https://www.docs.developers.amplitude.com/session-replay/privacy/' },
+    link: { label: 'SR privacy controls docs', url: 'https://amplitude.com/docs/session-replayprivacy/' },
   },
   {
     steps: ['privacy'],
@@ -332,7 +332,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Session Replay does not use cookies',
     body: 'SR data is stored client-side in IndexedDB and aggressively cleaned up. No changes to your cookie consent policy are needed specifically for Session Replay. However, be aware of what cookies Amplitude sets in general.',
-    link: { label: 'Amplitude cookie documentation', url: 'https://www.docs.developers.amplitude.com/data/sdks/browser-2/#cookie-management' },
+    link: { label: 'Amplitude cookie documentation', url: 'https://amplitude.com/docs/sdks/analytics/browser/cookies-and-consent-management' },
   },
   {
     steps: ['privacy'],
@@ -349,7 +349,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Use feature flags for granular control',
     body: 'Create a feature flag to control SR by user segment. Evaluate the flag immediately on app launch, then disable the SR plugin or SDK for users in the restricted variant.',
-    link: { label: 'Amplitude Experiment docs', url: 'https://www.docs.developers.amplitude.com/experiment/' },
+    link: { label: 'Amplitude Experiment docs', url: 'https://amplitude.com/docs/feature-experiment' },
   },
   {
     steps: ['privacy'],
@@ -358,7 +358,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Data deletion and compliance APIs',
     body: 'Use the User Privacy API to delete all replays for a user, or the DSAR API to delete event and property history by time range. Session Replay data is also deleted when a project is deleted.',
-    link: { label: 'User Privacy API', url: 'https://www.docs.developers.amplitude.com/analytics/apis/user-privacy-api/' },
+    link: { label: 'User Privacy API', url: 'https://amplitude.com/docs/apis/analytics/user-privacy' },
   },
 
   // ─── Step 7: Validation ─────────────────────────────────────────
@@ -370,7 +370,7 @@ export const callouts: Callout[] = [
     type: 'critical',
     title: 'CSP must allow SR ingestion endpoint',
     body: 'Your Content Security Policy (connect-src) must allow connections to the Session Replay ingestion domain. If CSP blocks it, the SDK silently fails to upload replays with no visible error.',
-    link: { label: 'SR troubleshooting: CSP', url: 'https://www.docs.developers.amplitude.com/session-replay/troubleshooting/' },
+    link: { label: 'SR troubleshooting: CSP', url: 'https://amplitude.com/docs/session-replaytroubleshooting/' },
   },
   {
     steps: ['validation'],
@@ -424,7 +424,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Systematic debugging checklist',
     body: 'No replays showing up? Check in this order: (1) Is SR enabled for the project? (2) Is the sample rate above 0%? (3) Are there CSP or network errors in the console? (4) Do events have session IDs (not -1)? (5) Have you exceeded your monthly quota?',
-    link: { label: 'Full troubleshooting guide', url: 'https://www.docs.developers.amplitude.com/session-replay/troubleshooting/' },
+    link: { label: 'Full troubleshooting guide', url: 'https://amplitude.com/docs/session-replaytroubleshooting/' },
   },
   {
     steps: ['debugging'],
@@ -433,7 +433,7 @@ export const callouts: Callout[] = [
     type: 'tip',
     title: 'Check console for Amplitude Logger',
     body: 'Open Chrome DevTools console and look for logs from "Amplitude Logger", particularly those marked with [Warn] or [Error]. Also check the Network tab for any failed requests.',
-    link: { label: 'SR Plugin troubleshooting', url: 'https://www.docs.developers.amplitude.com/session-replay/sdks/plugin/#troubleshooting' },
+    link: { label: 'SR Plugin troubleshooting', url: 'https://amplitude.com/docs/session-replay/instrument-session-replayplugin/#troubleshooting' },
   },
   {
     steps: ['debugging'],
@@ -459,7 +459,7 @@ export const callouts: Callout[] = [
     type: 'warning',
     title: 'Session Replay ID not indexed',
     body: 'If your project has hit the 2,000 event property limit, [Amplitude] Session Replay ID won\'t be indexed and replays won\'t appear linked to events. Check property count in Data > Properties.',
-    link: { label: 'Data governance best practices', url: 'https://www.docs.developers.amplitude.com/data/data-planning-playbook/' },
+    link: { label: 'Data governance best practices', url: 'https://amplitude.com/docs/data/data-planning-playbook' },
   },
   {
     steps: ['debugging'],

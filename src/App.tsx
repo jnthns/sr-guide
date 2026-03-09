@@ -1,13 +1,32 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { setOrigination } from './analytics';
 
-const navItems = [
-  { to: '/', label: 'Before You Begin', accent: true },
-  { to: '/guide', label: 'Full Guide', accent: false },
-  { to: '/privacy', label: 'Privacy & Masking', accent: false },
-  { to: '/deletion', label: 'Data Deletion', accent: false },
-  { to: '/validation', label: 'Validation', accent: false },
+const tabs = [
+  {
+    id: 'session-replay',
+    label: 'Session Replay',
+    defaultPath: '/',
+    navItems: [
+      { to: '/', label: 'Before You Begin', accent: true },
+      { to: '/guide', label: 'Full Guide', accent: false },
+      { to: '/privacy', label: 'Privacy & Masking', accent: false },
+      { to: '/deletion', label: 'Data Deletion', accent: false },
+      { to: '/validation', label: 'Validation', accent: false },
+    ],
+  },
+  {
+    id: 'heatmaps',
+    label: 'Heatmaps',
+    defaultPath: '/heatmaps',
+    navItems: [
+      { to: '/heatmaps', label: 'Overview', accent: false },
+    ],
+  },
 ];
+
+function getActiveTabId(pathname: string) {
+  return pathname.startsWith('/heatmaps') ? 'heatmaps' : 'session-replay';
+}
 
 function AmplitudeLogo() {
   return (
@@ -20,26 +39,54 @@ function AmplitudeLogo() {
 
 export default function App() {
   const { pathname } = useLocation();
+  const activeTabId = getActiveTabId(pathname);
+  const activeTab = tabs.find((t) => t.id === activeTabId)!;
 
   return (
     <div className="min-h-screen">
-      <header className="bg-amp-blue text-white py-6 px-4 shadow-lg">
-        <div className="max-w-4xl mx-auto">
+      <header className="bg-amp-blue text-white shadow-lg">
+        <div className="max-w-4xl mx-auto px-4 pt-6 pb-0">
           <div className="flex items-center gap-3">
             <AmplitudeLogo />
             <div>
               <h1 className="text-2xl font-bold tracking-tight">
-            <Link to="/" className="hover:text-indigo-200 transition-colors" onClick={() => setOrigination('header title')}>
-              Session Replay Implementation Guide
-            </Link>
+                <Link to="/" className="hover:text-indigo-200 transition-colors" onClick={() => setOrigination('header title')}>
+                  Implementation Guide
+                </Link>
               </h1>
               <p className="mt-0.5 text-sm text-indigo-200">
-                Follow each step to set up Amplitude Session Replay for your platform.
+                Set up Amplitude's experience analytics for your platform.
               </p>
             </div>
           </div>
-          <nav className="mt-4 flex flex-wrap gap-2">
-            {navItems.map(({ to, label, accent }) => {
+
+          <div className="mt-5 flex gap-1 border-b border-white/10">
+            {tabs.map((tab) => {
+              const isActive = tab.id === activeTabId;
+              return (
+                <Link
+                  key={tab.id}
+                  to={tab.defaultPath}
+                  onClick={() => setOrigination(`tab: ${tab.label}`)}
+                  className={`relative px-5 py-2.5 text-sm font-semibold transition-colors ${
+                    isActive
+                      ? 'text-white'
+                      : 'text-indigo-300 hover:text-white'
+                  }`}
+                >
+                  {tab.label}
+                  {isActive && (
+                    <span className="absolute inset-x-0 bottom-0 h-0.5 bg-white rounded-full" />
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="bg-amp-blue/80 border-t border-white/5">
+          <nav className="max-w-4xl mx-auto px-4 py-2 flex flex-wrap gap-2">
+            {activeTab.navItems.map(({ to, label, accent }) => {
               const isActive = pathname === to;
               return (
                 <Link

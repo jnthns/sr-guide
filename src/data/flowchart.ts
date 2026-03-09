@@ -137,98 +137,98 @@ export const methods: Record<ImplementationMethod, MethodInfo> = {
     label: 'Session Replay Plugin',
     description:
       'The recommended approach for Browser SDK users. The plugin attaches to your existing Amplitude instance and handles replay capture, session ID management, and property forwarding automatically.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/plugin/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-plugin',
   },
   'standalone-sr-sdk': {
     id: 'standalone-sr-sdk',
     label: 'Standalone Session Replay SDK',
     description:
       'A standalone SDK for capturing replays when using a third-party analytics provider. You manage device ID and session ID synchronization between your analytics provider and this SDK.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk',
   },
   'standalone-sr-sdk-segment': {
     id: 'standalone-sr-sdk-segment',
     label: 'Standalone SR SDK + Segment Middleware',
     description:
       'Uses the standalone Session Replay SDK alongside Segment source middlewares to keep session IDs in sync and append replay properties to all track calls.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk',
   },
   'standalone-sr-sdk-legacy': {
     id: 'standalone-sr-sdk-legacy',
     label: 'Standalone SR SDK (Legacy JS SDK)',
     description:
       'The legacy JS SDK is not compatible with the Session Replay Plugin. You must use the standalone SDK and manually forward replay properties on every logEvent call.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk',
   },
   'gtm-plugin': {
     id: 'gtm-plugin',
     label: 'Session Replay Plugin via GTM',
     description:
       'Uses the Browser SDK GTM template with a separate Custom HTML tag to load and attach the Session Replay plugin. The GTM template alone is not enough.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/plugin/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-plugin',
   },
   'standalone-sr-sdk-warehouse': {
     id: 'standalone-sr-sdk-warehouse',
     label: 'Standalone SR SDK + Data Warehouse Events',
     description:
       'The standalone SDK captures replays client-side while your events flow through HTTP API or data warehouse. You must add the [Amplitude] Session Replay ID property to your event records.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/standalone/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk',
   },
   'ios-plugin': {
     id: 'ios-plugin',
     label: 'iOS Session Replay Plugin',
     description:
       'The recommended approach for iOS Swift SDK users. The plugin attaches to your Amplitude instance and handles replay capture automatically.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/ios/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-ios-plugin',
   },
   'ios-middleware': {
     id: 'ios-middleware',
     label: 'iOS Session Replay Middleware',
     description:
       'For users on the legacy/maintenance iOS SDK. Uses middleware to integrate Session Replay with the older SDK.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/ios/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-ios-plugin',
   },
   'ios-standalone-sdk': {
     id: 'ios-standalone-sdk',
     label: 'iOS Standalone SR SDK',
     description:
       'For iOS apps using a third-party analytics provider. You manage device ID and session ID synchronization manually.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/ios-standalone/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-ios-standalone-sdk',
   },
   'android-plugin': {
     id: 'android-plugin',
     label: 'Android Session Replay Plugin',
     description:
       'The recommended approach for Android Kotlin SDK users. The plugin attaches to your Amplitude instance and handles replay capture automatically.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/android/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-android-plugin',
   },
   'android-middleware': {
     id: 'android-middleware',
     label: 'Android Session Replay Middleware',
     description:
       'For users on the legacy/maintenance Android SDK. Uses middleware to integrate Session Replay with the older SDK.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/android/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-android-plugin',
   },
   'android-standalone-sdk': {
     id: 'android-standalone-sdk',
     label: 'Android Standalone SR SDK',
     description:
       'For Android apps using a third-party analytics provider. You manage device ID and session ID synchronization manually.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/android-standalone/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-android-standalone',
   },
   'rn-plugin': {
     id: 'rn-plugin',
     label: 'React Native SR Plugin',
     description:
       'The Session Replay plugin for React Native wraps the native iOS and Android SR SDKs. Currently in beta.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/react-native/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-react-native-sdk-plugin',
   },
   'rn-segment-plugin': {
     id: 'rn-segment-plugin',
     label: 'React Native SR + Segment Plugin',
     description:
       'Uses the official RN Segment SR plugin with Amplitude Session plugin and Segment\'s Amplitude (Actions) destination.',
-    docsUrl: 'https://www.docs.developers.amplitude.com/session-replay/sdks/react-native/',
+    docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-react-native-sdk-plugin',
   },
 };
 

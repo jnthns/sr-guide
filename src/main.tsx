@@ -10,6 +10,7 @@ import { PrivacyPage } from './pages/PrivacyPage'
 import { DeletionPage } from './pages/DeletionPage'
 import { ValidationPage } from './pages/ValidationPage'
 import { SessionIdOptionsPage } from './pages/SessionIdOptionsPage'
+import { HeatmapsPage } from './pages/HeatmapsPage'
 
 const router = createBrowserRouter(
   [
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
         { path: 'deletion', element: <DeletionPage /> },
         { path: 'validation', element: <ValidationPage /> },
         { path: 'session-id-options', element: <SessionIdOptionsPage /> },
+        { path: 'heatmaps', element: <HeatmapsPage /> },
       ],
     },
   ],

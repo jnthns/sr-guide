@@ -85,13 +85,13 @@ export function DeletionPage() {
           <DeletionMethod
             title="User Privacy API"
             description="Deletes all events for selected users, which includes any session replays linked to those events. Use this for individual deletion requests (e.g., GDPR right to erasure). This erases the user's full event history in Amplitude."
-            url="https://www.docs.developers.amplitude.com/analytics/apis/user-privacy-api/"
+            url="https://amplitude.com/docs/apis/analytics/user-privacy"
             linkLabel="User Privacy API docs"
           />
           <DeletionMethod
             title="DSAR API"
             description="Deletes event and property history by time range for a user. Any session replays tied to events in that window are also removed. Use this for Data Subject Access Requests that require deletion within a specific period."
-            url="https://www.docs.developers.amplitude.com/analytics/apis/dsar-api/"
+            url="https://amplitude.com/docs/apis/analytics/ccpa-dsar"
             linkLabel="DSAR API docs"
           />
           <DeletionMethod

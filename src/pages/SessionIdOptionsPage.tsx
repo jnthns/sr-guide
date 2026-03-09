@@ -162,7 +162,7 @@ export function SessionIdOptionsPage() {
           &larr; Back to Full Guide
         </Link>
         <a
-          href="https://www.docs.developers.amplitude.com/analytics/apis/lookup-tables-api/"
+          href="https://amplitude.com/docs/data/sources/instrument-track-sessions"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1 rounded-lg bg-amp-light px-4 py-2 text-sm font-semibold text-amp-indigo hover:bg-amp-border transition-colors"
