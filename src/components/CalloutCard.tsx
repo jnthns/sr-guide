@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { CalloutType } from '../data/types';
+import { track } from '../analytics';
 
 interface CalloutCardProps {
   type: CalloutType;
@@ -46,6 +47,12 @@ export function CalloutCard({ type, title, body, link, internalLink }: CalloutCa
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-amp-indigo hover:underline"
+                onClick={() => track('callout_link_clicked', {
+                  callout_title: title,
+                  link_label: link.label,
+                  url: link.url,
+                  link_type: 'external',
+                })}
               >
                 {link.label}
                 <span aria-hidden="true">&rarr;</span>
@@ -55,6 +62,12 @@ export function CalloutCard({ type, title, body, link, internalLink }: CalloutCa
               <Link
                 to={internalLink.to}
                 className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-amp-indigo hover:underline"
+                onClick={() => track('callout_link_clicked', {
+                  callout_title: title,
+                  link_label: internalLink.label,
+                  destination: internalLink.to,
+                  link_type: 'internal',
+                })}
               >
                 {internalLink.label}
                 <span aria-hidden="true">&rarr;</span>

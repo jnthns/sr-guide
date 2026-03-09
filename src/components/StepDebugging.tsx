@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { debuggingContent } from '../data/content';
+import { track } from '../analytics';
 
 export function StepDebugging() {
   const [expandedSections, setExpandedSections] = useState<Set<number>>(new Set([0]));
@@ -7,8 +8,15 @@ export function StepDebugging() {
   const toggleSection = (index: number) => {
     setExpandedSections((prev) => {
       const next = new Set(prev);
-      if (next.has(index)) next.delete(index);
-      else next.add(index);
+      const expanding = !next.has(index);
+      if (expanding) next.add(index);
+      else next.delete(index);
+
+      track('debugging_section_toggled', {
+        section: debuggingContent.sections[index].heading,
+        expanded: expanding,
+      });
+
       return next;
     });
   };
