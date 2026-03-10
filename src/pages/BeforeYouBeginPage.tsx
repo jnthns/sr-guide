@@ -104,7 +104,7 @@ export function BeforeYouBeginPage() {
               Check your event property count
             </h3>
             <p className="mt-2 text-sm text-amber-700 leading-relaxed">
-              Amplitude projects have a <strong>2,000 event property limit</strong>. If your project is at or near this limit, the <code className="rounded bg-amber-100 px-1 py-0.5 text-xs">[Amplitude] Session Replay ID</code> property won't be indexed — and replays will silently fail to link to events. Check your property count in <strong>Data &gt; Properties</strong> before enabling Session Replay.
+              Amplitude projects have a <strong>2,000 event property limit</strong>. If your project is at or near this limit, new properties won't be indexed, which can impact your broader analytics. Check your property count in <strong>Data &gt; Properties</strong> before enabling Session Replay.
             </p>
           </div>
         </div>

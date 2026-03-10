@@ -11,6 +11,7 @@ import { DeletionPage } from './pages/DeletionPage'
 import { ValidationPage } from './pages/ValidationPage'
 import { SessionIdOptionsPage } from './pages/SessionIdOptionsPage'
 import { HeatmapsPage } from './pages/HeatmapsPage'
+import { SystemStatusPage } from './pages/SystemStatusPage'
 
 const router = createBrowserRouter(
   [
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
         { path: 'privacy', element: <PrivacyPage /> },
         { path: 'deletion', element: <DeletionPage /> },
         { path: 'validation', element: <ValidationPage /> },
+        { path: 'system-status', element: <SystemStatusPage /> },
         { path: 'session-id-options', element: <SessionIdOptionsPage /> },
         { path: 'heatmaps', element: <HeatmapsPage /> },
       ],

@@ -22,7 +22,7 @@ amplitude.init(API_KEY);`,
         text: 'Minimum Browser SDK version is 1.9.1. Only the Browser 2.0 SDK is compatible with the plugin.',
         link: { label: 'Browser SDK docs', url: 'https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2' },
       },
-      'The plugin automatically manages Session Replay IDs on all tracked events.',
+      'The plugin automatically handles session replay capture and session management.',
       {
         text: 'Not required to track session start/end events separately.',
       },
@@ -53,16 +53,8 @@ await sessionReplay.init(AMPLITUDE_API_KEY, {
 // When session ID changes, update the SR SDK
 thirdPartyAnalytics.onNewSession((newSessionId) => {
   sessionReplay.setSessionId(newSessionId);
-});
-
-// Add SR properties to every event you send
-const sessionReplayProperties = sessionReplay.getSessionReplayProperties();
-thirdPartyAnalytics.track(eventName, {
-  ...eventProperties,
-  ...sessionReplayProperties,
 });`,
     notes: [
-      'You must call getSessionReplayProperties() and include the result on every event you want to be replayable.',
       {
         text: 'deviceId and sessionId must match what your analytics provider sends to Amplitude.',
         link: { label: 'Standalone SDK docs', url: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk' },
@@ -117,19 +109,9 @@ analytics.addSourceMiddleware(({ payload, next }) => {
   next(payload);
 });
 
-// Middleware 2: Append SR properties to all track calls
-analytics.addSourceMiddleware(({ payload, next }) => {
-  if (payload.type() === 'track') {
-    const srProps = sessionReplay.getSessionReplayProperties();
-    payload.obj.properties = {
-      ...payload.obj.properties,
-      ...srProps,
-    };
-  }
-  next(payload);
-});`,
+`,
     notes: [
-      'Both middlewares are required. The first keeps session IDs in sync; the second attaches replay properties.',
+      'The middleware keeps session IDs in sync across page loads, which is required for replays to work.',
       {
         text: 'Recommend updating to Amplitude Actions destination in Segment for more reliable session stitching via session_id.',
         link: { label: 'Amplitude (Actions) destination', url: 'https://segment.com/docs/connections/destinations/catalog/actions-amplitude/' },
@@ -161,13 +143,6 @@ window.amplitude.getInstance().onInit(() => {
 // Update session ID when a new session starts
 window.amplitude.getInstance().onNewSessionStart((client) => {
   sessionReplay.setSessionId(client.getSessionId());
-});
-
-// Attach SR properties to every logEvent call
-const sessionReplayProperties = sessionReplay.getSessionReplayProperties();
-window.amplitude.getInstance().logEvent(eventName, {
-  ...eventProperties,
-  ...sessionReplayProperties,
 });`,
     notes: [
       'The legacy JS SDK is NOT compatible with the Session Replay Plugin — you must use the standalone SDK.',
@@ -175,7 +150,6 @@ window.amplitude.getInstance().logEvent(eventName, {
         text: 'Amplitude recommends migrating to the Browser 2.0 SDK and using the plugin instead.',
         link: { label: 'Migration guide', url: 'https://amplitude.com/docs/sdks/analytics/browser/browser-sdk-2#migrate-from-maintenance-sdk' },
       },
-      'You must manually attach getSessionReplayProperties() to every logEvent call.',
     ],
   },
 
@@ -226,22 +200,10 @@ await sessionReplay.init(AMPLITUDE_API_KEY, {
   deviceId: 'your-device-id',
   sessionId: Date.now(), // Unix timestamp
   sampleRate: 0.5,
-}).promise;
-
-// In your data warehouse / event table, add this property:
-// Column: [Amplitude] Session Replay ID
-// Value:  deviceId + "/" + sessionId
-//
-// Example row:
-// | Event         | Device ID                            | Session ID    | [Amplitude] Session Replay ID                    |
-// | Signed Up     | 9ec2ef9a-4bf3-41dc-86e3-8acec92ad1c1 | 1739559241974 | 9ec2ef9a-4bf3-41dc-86e3-8acec92ad1c1/1739559241974 |`,
+}).promise;`,
     notes: [
       'You must still run the SR SDK client-side to capture DOM changes. The warehouse path only controls how events reach Amplitude.',
-      {
-        text: 'The [Amplitude] Session Replay ID value is deviceId/sessionId (slash-separated).',
-        link: { label: 'HTTP API v2 reference', url: 'https://amplitude.com/docs/apis/analytics/http-v2' },
-      },
-      'Only include this property on events within sessions you want replayable — each counts toward monthly quota.',
+      'Ensure the device_id and session_id on your warehouse events match the values used to initialize the SR SDK.',
     ],
   },
 
@@ -428,13 +390,6 @@ val sessionReplay = SessionReplay(
     deviceId = "device-id",
     sessionId = Date().time,
     sampleRate = 1.0,
-)
-
-// Track events with session replay properties
-val sessionReplayProperties = sessionReplay.getSessionReplayProperties()
-ThirdPartyAnalytics.track(
-    eventName,
-    eventProperties + sessionReplayProperties
 )
 
 // Keep IDs in sync when they change
@@ -652,12 +607,12 @@ export const validationContent = {
       },
       {
         label: 'Use the Event Explorer extension',
-        detail: 'Install the Amplitude Event Explorer Chrome Extension. Trigger events and confirm each carries [Amplitude] Session Replay ID, device_id, and session_id.',
+        detail: 'Install the Amplitude Event Explorer Chrome Extension. Trigger events and confirm each carries a consistent device_id and session_id.',
         link: { label: 'Get the extension', url: 'https://chromewebstore.google.com/detail/amplitude-event-explorer/acehfjhnmhbmgkedjmjlobpgdicnhkbp' },
       },
       {
-        label: 'Check the Ingestion Monitor',
-        detail: 'Go to Users & Sessions > Session Replays > Gear Icon > Ingestion Monitor. Look for any blocked or throttled requests.',
+        label: 'Check System Status',
+        detail: 'Go to Users & Sessions > Session Replays > Gear Icon > System Status. Review diagnostic charts for ingestion, throttling, quota, and invalid session IDs.',
       },
       {
         label: 'Validate in a Segmentation chart',
@@ -673,12 +628,12 @@ export const validationContent = {
         detail: 'An admin must enable mobile capture for the project in the Session Replay & Heatmaps Settings. Without this, mobile replays will not be collected regardless of SDK configuration.',
       },
       {
-        label: 'Check the Ingestion Monitor',
-        detail: 'Go to Users & Sessions > Session Replays > Gear Icon > Ingestion Monitor. Confirm replays are being received.',
+        label: 'Check System Status',
+        detail: 'Go to Users & Sessions > Session Replays > Gear Icon > System Status. Confirm replays are being received and review diagnostic charts.',
       },
       {
         label: 'Trigger at least one event',
-        detail: 'Mobile SDKs must send at least one event with a valid Session Replay ID within a session. A session with only replay data but zero events will not appear.',
+        detail: 'Mobile SDKs must send at least one event within a session for it to be replayable. A session with only replay data but zero events will not appear.',
       },
       {
         label: 'Verify session and device IDs',
@@ -691,7 +646,7 @@ export const validationContent = {
       },
       {
         label: 'Test flush behavior',
-        detail: 'Background the app and bring it back. Verify that replay data was flushed before backgrounding (check Ingestion Monitor for new data).',
+        detail: 'Background the app and bring it back. Verify that replay data was flushed before backgrounding (check System Status for new data).',
       },
     ] as ValidationStep[],
   },
@@ -721,16 +676,11 @@ export const debuggingContent = {
     {
       heading: 'Events Exist but No Playable Replays',
       items: [
-        {
-          text: 'Is [Amplitude] Session Replay ID present on events? Check via Event Explorer or User Lookup.',
+        { text: 'Are session/device IDs changing mid-session? Look up the user and inspect event-by-event consistency.' },
+        { text: 'Do events have consistent device_id and session_id? Check via Event Explorer or User Lookup.',
           link: { label: 'Event Explorer extension', url: 'https://chromewebstore.google.com/detail/amplitude-event-explorer/acehfjhnmhbmgkedjmjlobpgdicnhkbp' },
         },
-        { text: 'Are session/device IDs changing mid-session? Look up the user and inspect event-by-event consistency.' },
-        {
-          text: 'Has the project hit the 2,000 event property limit? New properties (including Session Replay ID) won\'t be indexed.',
-          link: { label: 'Data governance best practices', url: 'https://amplitude.com/docs/data/data-planning-playbook' },
-        },
-        { text: 'For Segment: are both middlewares installed? Missing either one breaks the linkage.' },
+        { text: 'For Segment: is the session ID sync middleware installed? Missing it breaks replay linkage.' },
       ] as DebuggingItem[],
     },
     {

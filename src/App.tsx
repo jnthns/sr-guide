@@ -12,6 +12,7 @@ const tabs = [
       { to: '/privacy', label: 'Privacy & Masking', accent: false },
       { to: '/deletion', label: 'Data Deletion', accent: false },
       { to: '/validation', label: 'Validation', accent: false },
+      { to: '/system-status', label: 'System Status', accent: false },
     ],
   },
   {

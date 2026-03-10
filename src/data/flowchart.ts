@@ -171,7 +171,7 @@ export const methods: Record<ImplementationMethod, MethodInfo> = {
     id: 'standalone-sr-sdk-warehouse',
     label: 'Standalone SR SDK + Data Warehouse Events',
     description:
-      'The standalone SDK captures replays client-side while your events flow through HTTP API or data warehouse. You must add the [Amplitude] Session Replay ID property to your event records.',
+      'The standalone SDK captures replays client-side while your events flow through HTTP API or data warehouse. Ensure your events include matching device_id and session_id values.',
     docsUrl: 'https://amplitude.com/docs/session-replay/session-replay-standalone-sdk',
   },
   'ios-plugin': {
