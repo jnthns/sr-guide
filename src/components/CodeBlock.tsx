@@ -60,13 +60,6 @@ function tokenize(code: string, language?: string): Token[] {
   let i = 0;
   let buf = '';
 
-  function flush() {
-    if (buf) {
-      tokens.push({ type: 'default', value: buf });
-      buf = '';
-    }
-  }
-
   function pushKeywordsFromBuffer() {
     if (!buf) return;
     const parts = buf.split(/\b/);
