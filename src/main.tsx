@@ -12,6 +12,7 @@ import { ValidationPage } from './pages/ValidationPage'
 import { SessionIdOptionsPage } from './pages/SessionIdOptionsPage'
 import { HeatmapsPage } from './pages/HeatmapsPage'
 import { SystemStatusPage } from './pages/SystemStatusPage'
+import { ReleasesPage } from './pages/ReleasesPage'
 
 const router = createBrowserRouter(
   [
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
         { path: 'system-status', element: <SystemStatusPage /> },
         { path: 'session-id-options', element: <SessionIdOptionsPage /> },
         { path: 'heatmaps', element: <HeatmapsPage /> },
+        { path: 'releases', element: <ReleasesPage /> },
       ],
     },
   ],

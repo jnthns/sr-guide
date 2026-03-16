@@ -23,10 +23,20 @@ const tabs = [
       { to: '/heatmaps', label: 'Overview', accent: false },
     ],
   },
+  {
+    id: 'releases',
+    label: 'Releases',
+    defaultPath: '/releases',
+    navItems: [
+      { to: '/releases', label: 'All Releases', accent: false },
+    ],
+  },
 ];
 
 function getActiveTabId(pathname: string) {
-  return pathname.startsWith('/heatmaps') ? 'heatmaps' : 'session-replay';
+  if (pathname.startsWith('/heatmaps')) return 'heatmaps';
+  if (pathname.startsWith('/releases')) return 'releases';
+  return 'session-replay';
 }
 
 function AmplitudeLogo() {
