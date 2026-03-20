@@ -13,6 +13,7 @@ const tabs = [
       { to: '/deletion', label: 'Data Deletion', accent: false },
       { to: '/validation', label: 'Validation', accent: false },
       { to: '/system-status', label: 'System Status', accent: false },
+      { to: '/targeted-replay-capture', label: 'Targeted Capture', accent: false },
     ],
   },
   {

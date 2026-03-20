@@ -13,6 +13,7 @@ import { SessionIdOptionsPage } from './pages/SessionIdOptionsPage'
 import { HeatmapsPage } from './pages/HeatmapsPage'
 import { SystemStatusPage } from './pages/SystemStatusPage'
 import { ReleasesPage } from './pages/ReleasesPage'
+import { TargetedReplayCapturePage } from './pages/TargetedReplayCapturePage'
 
 const router = createBrowserRouter(
   [
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
         { path: 'system-status', element: <SystemStatusPage /> },
         { path: 'session-id-options', element: <SessionIdOptionsPage /> },
         { path: 'heatmaps', element: <HeatmapsPage /> },
+        { path: 'targeted-replay-capture', element: <TargetedReplayCapturePage /> },
         { path: 'releases', element: <ReleasesPage /> },
       ],
     },
