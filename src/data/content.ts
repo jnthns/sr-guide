@@ -254,7 +254,7 @@ window.amplitude.getInstance().onNewSessionStart((client) => {
 <!-- (Configure via GTM UI with your API key) -->
 
 <!-- Step 2: Add a Custom HTML tag with the SR plugin -->
-<script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.13.2-min.js.gz"></script>
+<script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.27.7-min.js.gz"></script>
 <script>
   const sessionReplayTracking = window.sessionReplay.plugin({
     sampleRate: 0.5,
