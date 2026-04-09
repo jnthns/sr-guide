@@ -58,18 +58,23 @@ export default function App() {
     <div className="min-h-screen">
       <header className="bg-amp-blue text-white shadow-lg">
         <div className="max-w-4xl mx-auto px-4 pt-6 pb-0">
-          <div className="flex items-center gap-3">
-            <AmplitudeLogo />
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight">
-                <Link to="/" className="hover:text-indigo-200 transition-colors" onClick={() => setOrigination('header title')}>
-                  Implementation Guide
-                </Link>
-              </h1>
-              <p className="mt-0.5 text-sm text-indigo-200">
-                Set up Amplitude's experience analytics for your platform.
-              </p>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <AmplitudeLogo />
+              <div>
+                <h1 className="text-2xl font-bold tracking-tight">
+                  <Link to="/" className="hover:text-indigo-200 transition-colors" onClick={() => setOrigination('header title')}>
+                    Implementation Guide
+                  </Link>
+                </h1>
+                <p className="mt-0.5 text-sm text-indigo-200">
+                  Set up Amplitude's experience analytics for your platform.
+                </p>
+              </div>
             </div>
+            <span className="shrink-0 rounded-full bg-white/10 px-3 py-1 text-xs text-indigo-200">
+              Updated {new Date(__BUILD_TIME__).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
           </div>
 
           <div className="mt-5 flex gap-1 border-b border-white/10">
