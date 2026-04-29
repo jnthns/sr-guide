@@ -16,7 +16,8 @@ import { TargetedReplayCapturePage } from './pages/TargetedReplayCapturePage'
 import { IframesPage } from './pages/IframesPage'
 import { LocalIframeTestPage } from './pages/LocalIframeTestPage'
 
-const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+const viteBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+const routerBasename = window.location.pathname.startsWith('/sr-guide') ? '/sr-guide' : viteBasename
 
 const router = createBrowserRouter(
   [
