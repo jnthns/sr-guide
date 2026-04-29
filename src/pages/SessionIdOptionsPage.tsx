@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { setOrigination } from '../analytics';
 
 export function SessionIdOptionsPage() {
   return (
@@ -156,7 +155,6 @@ export function SessionIdOptionsPage() {
       <div className="flex flex-wrap gap-3">
         <Link
           to="/guide"
-          onClick={() => setOrigination('session id options: back to guide')}
           className="inline-flex items-center gap-1 rounded-lg bg-amp-light px-4 py-2 text-sm font-semibold text-amp-indigo hover:bg-amp-border transition-colors"
         >
           &larr; Back to Full Guide

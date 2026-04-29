@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { CalloutType } from '../data/types';
-import { track, setOrigination } from '../analytics';
+import { pushGtmEvent } from '../gtm';
 
 interface CalloutCardProps {
   type: CalloutType;
@@ -47,7 +47,7 @@ export function CalloutCard({ type, title, body, link, internalLink }: CalloutCa
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-amp-indigo hover:underline"
-                onClick={() => track('callout_link_clicked', {
+                onClick={() => pushGtmEvent('callout_link_clicked', {
                   callout_title: title,
                   link_label: link.label,
                   url: link.url,
@@ -63,8 +63,7 @@ export function CalloutCard({ type, title, body, link, internalLink }: CalloutCa
                 to={internalLink.to}
                 className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-amp-indigo hover:underline"
                 onClick={() => {
-                  setOrigination(`callout: ${title}`);
-                  track('callout_link_clicked', {
+                  pushGtmEvent('callout_link_clicked', {
                     callout_title: title,
                     link_label: internalLink.label,
                     destination: internalLink.to,

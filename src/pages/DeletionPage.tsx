@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { setOrigination } from '../analytics';
 import { privacyContent } from '../data/content';
 import type { ContentItem } from '../data/types';
 
@@ -26,7 +25,6 @@ export function DeletionPage() {
           </p>
           <Link
             to="/"
-            onClick={() => setOrigination('deletion: warning banner')}
             className="shrink-0 inline-flex items-center gap-1 rounded-lg bg-red-100 px-3 py-1.5 text-sm font-semibold text-red-800 hover:bg-red-200 transition-colors"
           >
             Read Before You Begin

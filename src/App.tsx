@@ -1,5 +1,4 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { setOrigination } from './analytics';
 import { RouteAnalytics } from './components/RouteAnalytics';
 
 const tabs = [
@@ -75,7 +74,7 @@ export default function App() {
               <AmplitudeLogo />
               <div>
                 <h1 className="text-2xl font-bold tracking-tight">
-                  <Link to="/" className="hover:text-indigo-200 transition-colors" onClick={() => setOrigination('header title')}>
+                  <Link to="/" className="hover:text-indigo-200 transition-colors">
                     Implementation Guide
                   </Link>
                 </h1>
@@ -96,7 +95,6 @@ export default function App() {
                 <Link
                   key={tab.id}
                   to={tab.defaultPath}
-                  onClick={() => setOrigination(`tab: ${tab.label}`)}
                   className={`relative px-5 py-2.5 text-sm font-semibold transition-colors ${
                     isActive
                       ? 'text-white'
@@ -121,7 +119,6 @@ export default function App() {
                 <Link
                   key={to}
                   to={to}
-                  onClick={() => setOrigination(`nav: ${label}`)}
                   className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                     isActive
                       ? accent

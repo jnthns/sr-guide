@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import type { Platform, AnalyticsSource, ImplementationMethod, StepId } from '../data/types';
 import { resolveMethod, platforms, getSourcesForPlatform, methods } from '../data/flowchart';
 import { getCalloutsForStep } from '../data/callouts';
-import { track } from '../analytics';
+import { pushGtmEvent } from '../gtm';
 import { StepHeader } from './StepHeader';
 import { CalloutList } from './CalloutList';
 import { StepPlatform } from './StepPlatform';
@@ -49,7 +49,7 @@ export function Wizard() {
       setPlatform(p);
       setSource(null);
       setMethod(null);
-      track('guide_platform_selected', { platform: p });
+      pushGtmEvent('guide_platform_selected', { platform: p });
       goToStep(1);
     },
     [goToStep],
@@ -60,8 +60,8 @@ export function Wizard() {
       setSource(s);
       const resolved = resolveMethod(platform!, s);
       setMethod(resolved);
-      track('guide_source_selected', { platform, source: s });
-      track('guide_method_resolved', { platform, source: s, method: resolved });
+      pushGtmEvent('guide_source_selected', { platform, source: s });
+      pushGtmEvent('guide_method_resolved', { platform, source: s, method: resolved });
       goToStep(2);
     },
     [platform, goToStep],
@@ -70,7 +70,7 @@ export function Wizard() {
   const handleContinue = useCallback(() => {
     if (currentStep < STEPS.length - 1) {
       const step = STEPS[currentStep];
-      track('guide_step_continued', {
+      pushGtmEvent('guide_step_continued', {
         step_id: step.id,
         step_number: step.number,
         platform,
@@ -78,7 +78,7 @@ export function Wizard() {
         method,
       });
       if (currentStep === STEPS.length - 2) {
-        track('guide_completed', { platform, source, method });
+        pushGtmEvent('guide_completed', { platform, source, method });
       }
       goToStep(currentStep + 1);
     }
@@ -87,7 +87,7 @@ export function Wizard() {
   const handleEditStep = useCallback(
     (stepIndex: number) => {
       const step = STEPS[stepIndex];
-      track('guide_step_edited', { step_id: step.id, step_number: step.number });
+      pushGtmEvent('guide_step_edited', { step_id: step.id, step_number: step.number });
       if (stepIndex === 0) {
         setPlatform(null);
         setSource(null);

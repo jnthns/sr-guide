@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { loadGoogleTagManager, pushGtmEvent } from '../gtm';
+import { pushGtmEvent } from '../gtm';
 
 const LOCAL_IFRAME_SRC = `${import.meta.env.BASE_URL}iframe-local-test`;
 const EXTERNAL_IFRAME_URL = 'https://example.com';
@@ -8,8 +8,6 @@ export function IframesPage() {
   const [isExternalIframeActivated, setIsExternalIframeActivated] = useState(false);
 
   useEffect(() => {
-    loadGoogleTagManager();
-    pushGtmEvent('page_view', { page_path: '/iframes', page_title: 'Iframe Testing' });
     pushGtmEvent('iframes_page_loaded', { gtm_initialized: true });
   }, []);
 

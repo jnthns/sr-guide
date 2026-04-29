@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { track } from '../analytics';
+import { pushGtmEvent } from '../gtm';
 
 interface CodeBlockProps {
   code: string;
@@ -181,7 +181,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
   const handleCopy = async () => {
     await navigator.clipboard.writeText(code);
     setCopied(true);
-    track('code_copied', { language });
+    pushGtmEvent('code_copied', { language });
     setTimeout(() => setCopied(false), 2000);
   };
 

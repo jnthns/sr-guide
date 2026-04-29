@@ -1,4 +1,4 @@
-import { track } from '../analytics';
+import { pushGtmEvent } from '../gtm';
 
 const validationCategories = [
   {
@@ -89,7 +89,7 @@ export function SystemStatusPage() {
             return (
               <button
                 key={cat.title}
-                onClick={() => track('system_status_category_clicked', { category: cat.title })}
+                onClick={() => pushGtmEvent('system_status_category_clicked', { category: cat.title })}
                 className={`w-full rounded-xl border ${colors.border} ${colors.bg} p-4 text-left transition-colors hover:shadow-sm cursor-pointer`}
               >
                 <div className="flex items-start gap-3">

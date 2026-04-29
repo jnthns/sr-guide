@@ -3,7 +3,7 @@ import type { Platform } from '../data/types';
 import { StepValidation } from '../components/StepValidation';
 import { CalloutList } from '../components/CalloutList';
 import { getCalloutsForStep } from '../data/callouts';
-import { track } from '../analytics';
+import { pushGtmEvent } from '../gtm';
 
 const platformOptions: { id: Platform | 'all'; label: string }[] = [
   { id: 'web', label: 'Web' },
@@ -31,7 +31,7 @@ export function ValidationPage() {
             key={opt.id}
             onClick={() => {
               setPlatform(opt.id as Platform);
-              track('platform_filter_changed', { platform: opt.id, page: 'validation' });
+              pushGtmEvent('platform_filter_changed', { platform: opt.id, page: 'validation' });
             }}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors cursor-pointer ${
               platform === opt.id

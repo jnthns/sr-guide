@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Platform } from '../data/types';
 import { validationContent } from '../data/content';
-import { track } from '../analytics';
+import { pushGtmEvent } from '../gtm';
 
 interface StepValidationProps {
   platform: Platform | null;
@@ -19,14 +19,14 @@ export function StepValidation({ platform }: StepValidationProps) {
       if (nowChecked) next.add(index);
       else next.delete(index);
 
-      track('validation_check_toggled', {
+      pushGtmEvent('validation_check_toggled', {
         label: content.steps[index].label,
         checked: nowChecked,
         platform,
       });
 
       if (nowChecked && next.size === content.steps.length) {
-        track('validation_completed', { platform });
+        pushGtmEvent('validation_completed', { platform });
       }
 
       return next;

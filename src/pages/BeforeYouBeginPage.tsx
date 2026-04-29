@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { setOrigination } from '../analytics';
 
 export function BeforeYouBeginPage() {
   return (
@@ -19,7 +18,6 @@ export function BeforeYouBeginPage() {
         </p>
         <Link
           to="/session-id-options"
-          onClick={() => setOrigination('before you begin: session id options')}
           className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-amp-indigo hover:underline"
         >
           What options do I have?
@@ -52,7 +50,6 @@ export function BeforeYouBeginPage() {
         </ul>
         <Link
           to="/privacy"
-          onClick={() => setOrigination('before you begin: masking settings')}
           className="mt-4 inline-flex items-center gap-1 rounded-lg bg-amp-light px-3 py-1.5 text-sm font-semibold text-amp-indigo hover:bg-amp-border transition-colors"
         >
           View all privacy & masking options
@@ -71,7 +68,6 @@ export function BeforeYouBeginPage() {
         </p>
         <Link
           to="/deletion"
-          onClick={() => setOrigination('before you begin: deletion info')}
           className="mt-4 inline-flex items-center gap-1 rounded-lg bg-amp-light px-3 py-1.5 text-sm font-semibold text-amp-indigo hover:bg-amp-border transition-colors"
         >
           View deletion methods & compliance
@@ -118,7 +114,6 @@ export function BeforeYouBeginPage() {
         </p>
         <Link
           to="/guide"
-          onClick={() => setOrigination('before you begin: ready to start cta')}
           className="mt-4 inline-flex items-center gap-1 rounded-lg bg-white/20 px-5 py-2 text-sm font-semibold text-white hover:bg-white/30 transition-colors"
         >
           Go to the Full Guide

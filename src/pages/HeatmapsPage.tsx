@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { setOrigination } from '../analytics';
 
 export function HeatmapsPage() {
   return (
@@ -21,7 +20,6 @@ export function HeatmapsPage() {
             </p>
             <Link
               to="/"
-              onClick={() => setOrigination('heatmaps: sr prerequisites')}
               className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-amp-indigo hover:underline"
             >
               Review Session Replay prerequisites
@@ -162,7 +160,6 @@ export function HeatmapsPage() {
         </p>
         <Link
           to="/guide"
-          onClick={() => setOrigination('heatmaps: go to sr guide')}
           className="mt-4 inline-flex items-center gap-1 rounded-lg bg-white/20 px-5 py-2 text-sm font-semibold text-white hover:bg-white/30 transition-colors"
         >
           Go to the Session Replay Guide

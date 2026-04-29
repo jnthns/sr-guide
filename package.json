@@ -10,9 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@amplitude/analytics-browser": "^2.36.2",
-    "@amplitude/engagement-browser": "^1.0.8",
-    "@amplitude/plugin-session-replay-browser": "^1.25.20",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.1"
