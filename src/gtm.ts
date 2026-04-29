@@ -11,7 +11,14 @@ declare global {
   }
 }
 
+let isParentMuted = false;
+
+export function muteParentGtm() {
+  isParentMuted = true;
+}
+
 export function pushGtmEvent(event: string, properties: Record<string, unknown> = {}) {
+  if (isParentMuted) return;
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push({ event, ...properties });
 }

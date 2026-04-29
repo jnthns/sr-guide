@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { pushGtmEvent } from '../gtm';
+import { muteParentGtm, pushGtmEvent } from '../gtm';
 
 const LOCAL_IFRAME_SRC = `${import.meta.env.BASE_URL}iframe-local-test`;
 const EXTERNAL_IFRAME_URL = 'https://example.com';
@@ -9,6 +9,16 @@ export function IframesPage() {
 
   useEffect(() => {
     pushGtmEvent('iframes_page_loaded', { gtm_initialized: true });
+
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data?.type === 'iframe_active') {
+        pushGtmEvent('iframe_active', { source: 'local_iframe' });
+        muteParentGtm();
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
   }, []);
 
   function activateExternalIframe() {
@@ -16,6 +26,8 @@ export function IframesPage() {
       iframe_type: 'external',
       trigger_source: 'parent_activation_overlay',
     });
+    pushGtmEvent('iframe_active', { source: 'external_iframe' });
+    muteParentGtm();
     setIsExternalIframeActivated(true);
   }
 

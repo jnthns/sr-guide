@@ -7,6 +7,10 @@ export function LocalIframeTestPage() {
   const initializeIframeGtm = useCallback(() => {
     if (hasInitializedGtm) return;
 
+    if (window.parent !== window) {
+      window.parent.postMessage({ type: 'iframe_active' }, '*');
+    }
+
     pushGtmEvent('iframe_amplitude_init', {
       iframe_type: 'local_controlled',
       trigger_source: 'iframe_click',

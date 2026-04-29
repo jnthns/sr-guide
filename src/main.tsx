@@ -16,6 +16,8 @@ import { TargetedReplayCapturePage } from './pages/TargetedReplayCapturePage'
 import { IframesPage } from './pages/IframesPage'
 import { LocalIframeTestPage } from './pages/LocalIframeTestPage'
 
+const routerBasename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/'
+
 const router = createBrowserRouter(
   [
     {
@@ -41,7 +43,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/sr-guide',
+    basename: routerBasename,
   },
 )
 
