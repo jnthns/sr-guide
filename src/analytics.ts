@@ -6,6 +6,8 @@ import type { Event } from '@amplitude/analytics-core';
 const API_KEY = import.meta.env.VITE_AMPLITUDE_API_KEY as string | undefined;
 
 let _origination: string | null = null;
+let isInitialized = false;
+let isOptedOut = false;
 
 export function setOrigination(label: string) {
   _origination = label;
@@ -32,7 +34,7 @@ function originationEnrichment() {
 }
 
 export function initAnalytics() {
-  if (!API_KEY) return;
+  if (!API_KEY || isInitialized) return;
 
   const sessionReplay = sessionReplayPlugin({ sampleRate: 1 });
   amplitude.add(sessionReplay);
@@ -49,9 +51,21 @@ export function initAnalytics() {
       elementInteractions: false,
     },
   });
+
+  isInitialized = true;
+  if (isOptedOut) {
+    amplitude.setOptOut(true);
+  }
+}
+
+export function setAnalyticsOptOut(optOut: boolean) {
+  isOptedOut = optOut;
+  if (!API_KEY || !isInitialized) return;
+
+  amplitude.setOptOut(optOut);
 }
 
 export function track(event: string, properties?: Record<string, unknown>) {
-  if (!API_KEY) return;
+  if (!API_KEY || isOptedOut) return;
   amplitude.track(event, properties);
 }

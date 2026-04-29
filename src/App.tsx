@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import { setOrigination } from './analytics';
+import { RouteAnalytics } from './components/RouteAnalytics';
 
 const tabs = [
   {
@@ -32,11 +33,20 @@ const tabs = [
       { to: '/releases', label: 'All Releases', accent: false },
     ],
   },
+  {
+    id: 'iframes',
+    label: 'Iframes',
+    defaultPath: '/iframes',
+    navItems: [
+      { to: '/iframes', label: 'Overview', accent: false },
+    ],
+  },
 ];
 
 function getActiveTabId(pathname: string) {
   if (pathname.startsWith('/heatmaps')) return 'heatmaps';
   if (pathname.startsWith('/releases')) return 'releases';
+  if (pathname.startsWith('/iframes')) return 'iframes';
   return 'session-replay';
 }
 
@@ -53,9 +63,11 @@ export default function App() {
   const { pathname } = useLocation();
   const activeTabId = getActiveTabId(pathname);
   const activeTab = tabs.find((t) => t.id === activeTabId)!;
+  const mainWidthClass = activeTabId === 'iframes' ? 'max-w-7xl' : 'max-w-4xl';
 
   return (
     <div className="min-h-screen">
+      <RouteAnalytics />
       <header className="bg-amp-blue text-white shadow-lg">
         <div className="max-w-4xl mx-auto px-4 pt-6 pb-0">
           <div className="flex items-center justify-between gap-3">
@@ -127,7 +139,7 @@ export default function App() {
           </nav>
         </div>
       </header>
-      <main className="max-w-4xl mx-auto px-4 py-8">
+      <main className={`${mainWidthClass} mx-auto px-4 py-8`}>
         <Outlet />
       </main>
     </div>

@@ -2,7 +2,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import { initAnalytics } from './analytics'
 import App from './App'
 import { Wizard } from './components/Wizard'
 import { BeforeYouBeginPage } from './pages/BeforeYouBeginPage'
@@ -14,6 +13,8 @@ import { HeatmapsPage } from './pages/HeatmapsPage'
 import { SystemStatusPage } from './pages/SystemStatusPage'
 import { ReleasesPage } from './pages/ReleasesPage'
 import { TargetedReplayCapturePage } from './pages/TargetedReplayCapturePage'
+import { IframesPage } from './pages/IframesPage'
+import { LocalIframeTestPage } from './pages/LocalIframeTestPage'
 
 const router = createBrowserRouter(
   [
@@ -31,15 +32,18 @@ const router = createBrowserRouter(
         { path: 'heatmaps', element: <HeatmapsPage /> },
         { path: 'targeted-replay-capture', element: <TargetedReplayCapturePage /> },
         { path: 'releases', element: <ReleasesPage /> },
+        { path: 'iframes', element: <IframesPage /> },
       ],
+    },
+    {
+      path: '/iframe-local-test',
+      element: <LocalIframeTestPage />,
     },
   ],
   {
     basename: '/session-replay-guide',
   },
 )
-
-initAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
