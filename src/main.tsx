@@ -41,7 +41,7 @@ const router = createBrowserRouter(
     },
   ],
   {
-    basename: '/session-replay-guide',
+    basename: '/sr-guide',
   },
 )
 
