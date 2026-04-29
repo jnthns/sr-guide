@@ -45,51 +45,53 @@ export function IframesPage() {
         </div>
       </div>
 
-      <IframeCard
-        title="Local controlled iframe"
-        description="Same-origin iframe content served by this app. Click anywhere inside the iframe to push iframe_amplitude_init into the iframe dataLayer and request iframe GTM initialization."
-      >
-        <iframe
-          title="Local controlled Guides and Surveys iframe test"
-          src={LOCAL_IFRAME_SRC}
-          className="h-[420px] w-full rounded-xl border border-amp-border bg-white"
-          loading="lazy"
-          referrerPolicy="strict-origin-when-cross-origin"
-        />
-      </IframeCard>
-
-      <IframeCard
-        title="External iframe"
-        description="Cross-origin iframe for comparison. Use the activation overlay to push iframe_amplitude_init on the parent dataLayer before interacting with the external content."
-      >
-        <div className="relative">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <IframeCard
+          title="Local controlled iframe"
+          description="Same-origin iframe content served by this app. Click anywhere inside the iframe to push iframe_amplitude_init into the iframe dataLayer and request iframe GTM initialization."
+        >
           <iframe
-            title="External iframe test"
-            src={EXTERNAL_IFRAME_URL}
-            className="h-[420px] w-full rounded-xl border border-amp-border bg-white"
+            title="Local controlled Guides and Surveys iframe test"
+            src={LOCAL_IFRAME_SRC}
+            className="h-[520px] w-full rounded-xl border border-amp-border bg-white"
             loading="lazy"
             referrerPolicy="strict-origin-when-cross-origin"
           />
-          {!isExternalIframeActivated && (
-            <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-amp-blue/80 p-6 text-center text-white">
-              <div className="max-w-sm">
-                <p className="text-sm font-semibold">External iframe interaction is paused</p>
-                <p className="mt-2 text-sm text-indigo-100">
-                  Click below to push <code className="rounded bg-white/10 px-1 py-0.5 text-xs">iframe_amplitude_init</code>
-                  {' '}to the parent dataLayer, then interact with the external iframe.
-                </p>
-                <button
-                  type="button"
-                  onClick={activateExternalIframe}
-                  className="mt-4 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-amp-blue transition-colors hover:bg-indigo-100"
-                >
-                  Activate external iframe
-                </button>
+        </IframeCard>
+
+        <IframeCard
+          title="External iframe"
+          description="Cross-origin iframe for comparison. Use the activation overlay to push iframe_amplitude_init on the parent dataLayer before interacting with the external content."
+        >
+          <div className="relative">
+            <iframe
+              title="External iframe test"
+              src={EXTERNAL_IFRAME_URL}
+              className="h-[520px] w-full rounded-xl border border-amp-border bg-white"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
+            {!isExternalIframeActivated && (
+              <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-amp-blue/80 p-6 text-center text-white">
+                <div className="max-w-sm">
+                  <p className="text-sm font-semibold">External iframe interaction is paused</p>
+                  <p className="mt-2 text-sm text-indigo-100">
+                    Click below to push <code className="rounded bg-white/10 px-1 py-0.5 text-xs">iframe_amplitude_init</code>
+                    {' '}to the parent dataLayer, then interact with the external iframe.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={activateExternalIframe}
+                    className="mt-4 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-amp-blue transition-colors hover:bg-indigo-100"
+                  >
+                    Activate external iframe
+                  </button>
+                </div>
               </div>
-            </div>
-          )}
-        </div>
-      </IframeCard>
+            )}
+          </div>
+        </IframeCard>
+      </div>
     </div>
   );
 }
