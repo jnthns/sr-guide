@@ -9,6 +9,8 @@ export function IframesPage() {
 
   useEffect(() => {
     loadGoogleTagManager();
+    pushGtmEvent('page_view', { page_path: '/iframes', page_title: 'Iframe Testing' });
+    pushGtmEvent('iframes_page_loaded', { gtm_initialized: true });
   }, []);
 
   function activateExternalIframe() {
