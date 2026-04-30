@@ -7,18 +7,31 @@ type DataLayerEvent = {
 
 declare global {
   interface Window {
+    amplitude?: {
+      setOptOut?: (enabled: boolean) => void;
+    };
     dataLayer?: DataLayerEvent[];
   }
 }
 
-let isParentMuted = false;
+let isGtmTrackingMuted = false;
 
 export function muteParentGtm() {
-  isParentMuted = true;
+  muteGtmTracking();
+}
+
+export function muteGtmTracking() {
+  isGtmTrackingMuted = true;
+  window.amplitude?.setOptOut?.(true);
+}
+
+export function resumeGtmTracking() {
+  isGtmTrackingMuted = false;
+  window.amplitude?.setOptOut?.(false);
 }
 
 export function pushGtmEvent(event: string, properties: Record<string, unknown> = {}) {
-  if (isParentMuted) return;
+  if (isGtmTrackingMuted) return;
   window.dataLayer = window.dataLayer ?? [];
   window.dataLayer.push({ event, ...properties });
 }
