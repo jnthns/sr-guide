@@ -1,23 +1,46 @@
-import { useCallback, useState } from 'react';
-import { loadGoogleTagManager, pushGtmEvent } from '../gtm';
+import { useCallback, useEffect, useState } from 'react';
+import { loadGoogleTagManager, muteGtmTracking, pushGtmEvent, resumeGtmTracking } from '../gtm';
 
 export function LocalIframeTestPage() {
-  const [hasInitializedGtm, setHasInitializedGtm] = useState(false);
+  const [hasLoadedGtm, setHasLoadedGtm] = useState(false);
+  const [isIframeTrackingActive, setIsIframeTrackingActive] = useState(false);
 
   const initializeIframeGtm = useCallback(() => {
-    if (hasInitializedGtm) return;
+    if (isIframeTrackingActive) return;
 
-    if (window.parent !== window) {
-      window.parent.postMessage({ type: 'iframe_active' }, '*');
-    }
-
-    pushGtmEvent('iframe_amplitude_init', {
+    const iframeActivation = {
       iframe_type: 'local_controlled',
       trigger_source: 'iframe_click',
-    });
-    loadGoogleTagManager();
-    setHasInitializedGtm(true);
-  }, [hasInitializedGtm]);
+    };
+
+    resumeGtmTracking();
+
+    if (window.parent !== window) {
+      window.parent.postMessage({
+        type: 'iframe_amplitude_init',
+        ...iframeActivation,
+      }, '*');
+    }
+
+    pushGtmEvent('iframe_amplitude_init', iframeActivation);
+    if (!hasLoadedGtm) {
+      loadGoogleTagManager();
+      setHasLoadedGtm(true);
+    }
+    setIsIframeTrackingActive(true);
+  }, [hasLoadedGtm, isIframeTrackingActive]);
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data?.type !== 'iframe_tracking_inactive') return;
+
+      muteGtmTracking();
+      setIsIframeTrackingActive(false);
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
 
   return (
     <main
@@ -43,8 +66,10 @@ export function LocalIframeTestPage() {
         <div className="rounded-xl border border-amp-border bg-amp-light p-4" data-testid="local-iframe-gtm-status-card">
           <p className="text-sm font-semibold text-amp-blue" data-testid="local-iframe-gtm-status-label">Iframe GTM status</p>
           <p className="mt-1 text-sm text-gray-600" data-testid="local-iframe-gtm-status-message">
-            {hasInitializedGtm
-              ? 'iframe_amplitude_init has been pushed and iframe GTM initialization has been requested.'
+            {isIframeTrackingActive
+              ? 'iframe_amplitude_init has been pushed and iframe GTM tracking is active.'
+              : hasLoadedGtm
+                ? 'Iframe GTM is loaded but paused while parent tracking is active.'
               : 'Waiting for the first click inside this iframe.'}
           </p>
         </div>
