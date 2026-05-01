@@ -1,19 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState, type MouseEvent } from 'react';
 import { loadGoogleTagManager, muteGtmTracking, pushGtmEvent, resumeGtmTracking } from '../gtm';
 
 export function LocalIframeTestPage() {
   const [hasLoadedGtm, setHasLoadedGtm] = useState(false);
   const [isIframeTrackingActive, setIsIframeTrackingActive] = useState(false);
 
-  const initializeIframeGtm = useCallback(() => {
-    if (isIframeTrackingActive) return;
-
+  const initializeIframeGtm = useCallback((triggerSource = 'iframe_click') => {
     const iframeActivation = {
       iframe_type: 'local_controlled',
-      trigger_source: 'iframe_click',
+      trigger_source: triggerSource,
     };
 
     resumeGtmTracking();
+
+    if (isIframeTrackingActive) return;
 
     if (window.parent !== window) {
       window.parent.postMessage({
@@ -30,6 +30,23 @@ export function LocalIframeTestPage() {
     setIsIframeTrackingActive(true);
   }, [hasLoadedGtm, isIframeTrackingActive]);
 
+  const trackIframeButtonClick = useCallback((
+    e: MouseEvent<HTMLButtonElement>,
+    buttonName: string,
+    triggerSource: string,
+  ) => {
+    e.stopPropagation();
+    const wasGtmLoadedBeforeClick = hasLoadedGtm;
+
+    initializeIframeGtm(triggerSource);
+    pushGtmEvent('local_iframe_button_clicked', {
+      button_name: buttonName,
+      iframe_type: 'local_controlled',
+      iframe_tracking_active_before_click: isIframeTrackingActive,
+      iframe_gtm_loaded_before_click: wasGtmLoadedBeforeClick,
+    });
+  }, [hasLoadedGtm, initializeIframeGtm, isIframeTrackingActive]);
+
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
       if (e.data?.type !== 'iframe_tracking_inactive') return;
@@ -44,7 +61,7 @@ export function LocalIframeTestPage() {
 
   return (
     <main
-      onClick={initializeIframeGtm}
+      onClick={() => initializeIframeGtm()}
       className="min-h-screen bg-white p-6 text-gray-800"
       data-testid="local-iframe-test-page"
     >
@@ -77,6 +94,7 @@ export function LocalIframeTestPage() {
         <div className="grid gap-3 sm:grid-cols-2" data-testid="local-iframe-action-grid">
           <button
             type="button"
+            onClick={(e) => trackIframeButtonClick(e, 'primary_cta', 'primary_cta_click')}
             className="rounded-lg bg-amp-indigo px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-amp-purple"
             data-testid="local-iframe-primary-cta"
           >
@@ -84,6 +102,7 @@ export function LocalIframeTestPage() {
           </button>
           <button
             type="button"
+            onClick={(e) => trackIframeButtonClick(e, 'secondary_action', 'secondary_action_click')}
             className="rounded-lg border border-amp-border px-4 py-3 text-sm font-semibold text-amp-blue transition-colors hover:bg-amp-light"
             data-testid="local-iframe-secondary-action"
           >
